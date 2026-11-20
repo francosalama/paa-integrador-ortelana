@@ -1,5 +1,9 @@
 """Predice Format_Reporte para registros nuevos de Ortelana Textil.
 
+Validez: el modelo solo es confiable para pares (Sucursal_ID, Tela_ID) que ya aparecen en el histórico.
+Con validación agrupada por par (pares nuevos) su F1 macro cae a ~0,64, por lo que no debe usarse en
+producción para sucursales o telas nuevas (ver actividad 13 y README).
+
 Uso:
     python src/predecir.py --entrada registros.csv [--salida predicciones.csv] [--modelo models/modelo_productivo.joblib]
 """
