@@ -1,5 +1,10 @@
 """Predice Format_Reporte para registros nuevos de Ortelana Textil.
 
+El modelo usa solo Año, Metros1 y Metros2: no usa Sucursal_ID ni Tela_ID. Para un par (Sucursal, Tela) ya
+conocido alcanza con su formato histórico (es constante por par); el modelo está pensado para pares nuevos,
+donde su F1 macro estimado con validación agrupada por par es ~0,89 (ver actividades 13-15 y README).
+Si la entrada trae otras columnas (por ejemplo Sucursal_ID o Tela_ID), se conservan en la salida pero no se usan.
+
 Uso:
     python src/predecir.py --entrada registros.csv [--salida predicciones.csv] [--modelo models/modelo_productivo.joblib]
 """
@@ -12,7 +17,7 @@ import pandas as pd
 
 RAIZ = Path(__file__).resolve().parents[1]
 MODELO_POR_DEFECTO = RAIZ / 'models' / 'modelo_productivo.joblib'
-COLUMNAS = ['Sucursal_ID', 'Tela_ID', 'Año', 'Metros1', 'Metros2']
+COLUMNAS = ['Año', 'Metros1', 'Metros2']
 
 
 def main():
